@@ -1,0 +1,46 @@
+{
+  "name": "telebun",
+  "version": "0.1.0",
+  "description": "Telegram QR Authentication — seamless login via Telegram QR scan for Node.js web apps",
+  "keywords": [
+    "telegram",
+    "qr",
+    "auth",
+    "authentication",
+    "login",
+    "telegram-login",
+    "qr-auth"
+  ],
+  "homepage": "https://github.com/luckywirasakti/telebun",
+  "bugs": "https://github.com/luckywirasakti/telebun/issues",
+  "license": "MIT",
+  "author": "Lucky Wirasakti <lucky.wirasakti@gmail.com>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:ts": "vitest run",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prepack": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/qrcode": "^1.5.5",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
