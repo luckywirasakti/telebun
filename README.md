@@ -15,33 +15,18 @@ Seamless login flow: generate a QR code → user scans with Telegram → instant
 
 ## How It Works
 
-```
-┌──────────┐     ┌──────────┐     ┌────────────┐
-│  Browser  │     │  Telebun  │     │  Telegram  │
-│  (User)   │     │  Server   │     │    Bot     │
-└─────┬────┘     └─────┬────┘     └──────┬─────┘
-      │                 │                  │
-      │  POST /qr       │                  │
-      │────────────────>│                  │
-      │  { qrDataUrl,   │                  │
-      │    sessionId }   │                  │
-      │<────────────────│                  │
-      │                 │                  │
-      │  Scan QR ───────┼─────────────────>│
-      │  (deep link)    │                  │
-      │                 │                  │
-      │                 │  POST /callback  │
-      │                 │  { sessionId,    │
-      │                 │    user, sig }   │
-      │                 │<─────────────────│
-      │                 │                  │
-      │  GET /session/  │                  │
-      │  :id (poll)     │                  │
-      │────────────────>│                  │
-      │  { session:     │                  │
-      │    verified }   │                  │
-      │<────────────────│                  │
-      │                 │                  │
+```mermaid
+sequenceDiagram
+    participant Browser as Browser (User)
+    participant Server as Telebun Server
+    participant Bot as Telegram Bot
+
+    Browser->>Server: POST /qr
+    Server-->>Browser: { qrDataUrl, sessionId }
+    Browser->>Bot: Scan QR (deep link)
+    Bot->>Server: POST /callback<br/>{ sessionId, user, sig }
+    Browser->>Server: GET /session/:id (poll)
+    Server-->>Browser: { session: verified }
 ```
 
 1. Your app calls `POST /qr` → Telebun creates a session + QR code
@@ -54,7 +39,7 @@ Seamless login flow: generate a QR code → user scans with Telegram → instant
 ## Installation
 
 ```bash
-npm install telebun
+npm install @luckywirasakti/telebun
 ```
 
 ## Quick Start
@@ -66,8 +51,8 @@ Talk to [@BotFather](https://t.me/BotFather) to create a bot and get your `botTo
 ### 2. Set Up the Server
 
 ```ts
-import { Telebun, MemoryStore } from 'telebun';
-import { createHttpHandler } from 'telebun/http';
+import { Telebun, MemoryStore } from '@luckywirasakti/telebun';
+import { createHttpHandler } from '@luckywirasakti/telebun/http';
 import { createServer } from 'node:http';
 
 const telebun = new Telebun({
