@@ -9,14 +9,32 @@
     "authentication",
     "login",
     "telegram-login",
-    "qr-auth"
+    "qr-auth",
+    "telegram-bot"
   ],
-  "homepage": "https://github.com/luckywirasakti/telebun",
-  "bugs": "https://github.com/luckywirasakti/telebun/issues",
+  "homepage": "https://github.com/luckywirasakti/telebun#readme",
+  "bugs": {
+    "url": "https://github.com/luckywirasakti/telebun/issues"
+  },
   "license": "MIT",
   "author": "Lucky Wirasakti <lucky.wirasakti@gmail.com>",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./express": {
+      "types": "./dist/middleware/express.d.ts",
+      "default": "./dist/middleware/express.js"
+    },
+    "./http": {
+      "types": "./dist/middleware/http.d.ts",
+      "default": "./dist/middleware/http.js"
+    }
+  },
   "files": [
     "dist/",
     "README.md",
@@ -29,7 +47,7 @@
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "test": "node --test \"test/**/*.test.js\"",
-    "test:ts": "vitest run",
+    "test:ts": "npx tsx --test test/*.test.ts",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
     "prepack": "npm run clean && npm run build"
@@ -41,6 +59,10 @@
     "@types/node": "^22.0.0",
     "@types/qrcode": "^1.5.5",
     "typescript": "^5.7.0",
-    "vitest": "^3.0.0"
+    "tsx": "^4.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luckywirasakti/telebun.git"
   }
 }
