@@ -1,5 +1,8 @@
 {
-  "name": "telebun",
+  "name": "@luckywirasakti/telebun",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.1.0",
   "description": "Telegram QR Authentication — seamless login via Telegram QR scan for Node.js web apps",
   "keywords": [
